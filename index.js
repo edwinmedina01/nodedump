@@ -3,12 +3,18 @@ const { exec } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 const multer = require("multer");
+const cors = require('cors');
+
 
 const app = express();
 const port = process.env.PORT || 8080;
 const upload = multer({ dest: "/tmp" });
 
+
 let lastFilename = ""; // Para descarga o restore del último dump
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://fundacion-intur.vercel.app']
+}));
 
 // 👉 Ruta: Generar backup .sql
 app.get("/", async (req, res) => {
