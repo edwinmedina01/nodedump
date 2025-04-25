@@ -15,10 +15,11 @@ app.get("/", async (req, res) => {
   exec(cmd, async (error) => {
     if (error) return res.status(500).send("❌ Error al generar backup");
 
-    const auth = new google.auth.GoogleAuth({
-      keyFile: "credentials.json",
-      scopes: ["https://www.googleapis.com/auth/drive.file"],
-    });
+const auth = new google.auth.GoogleAuth({
+  credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS),
+  scopes: ['https://www.googleapis.com/auth/drive.file'],
+});
+
 
     const drive = google.drive({ version: "v3", auth: await auth.getClient() });
 
