@@ -15,7 +15,7 @@ app.get("/", async (req, res) => {
   exec(cmd, async (error) => {
     if (error) return res.status(500).send("❌ Error al generar backup");
 
-/* const auth = new google.auth.GoogleAuth({
+ const auth = new google.auth.GoogleAuth({
   credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS),
   scopes: ['https://www.googleapis.com/auth/drive.file'],
 });
@@ -34,12 +34,12 @@ app.get("/", async (req, res) => {
       },
       fields: "id, webViewLink",
     });
-    */
+    
 
     res.status(200).json({
       message: "✅ Backup subido",
-        file: filepath,
-     // link: upload.data.webViewLink,
+       // file: filepath,
+        link: upload.data.webViewLink,
     });
   });
 });
