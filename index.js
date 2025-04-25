@@ -55,7 +55,7 @@ app.post("/restore", (req, res) => {
   }
 
   const filePath = path.join("/tmp", lastFilename);
-  const cmd = `mysql -h ${process.env.MYSQL_HOST} -P ${process.env.MYSQL_PORT} -u ${process.env.MYSQL_USER} -p${process.env.MYSQL_PASSWORD} ${process.env.MYSQL_DATABASE} < ${filePath}`;
+  const cmd = `mysql -h ${process.env.MYSQL_HOST} -P ${process.env.MYSQL_PORT} -u ${process.env.MYSQL_USER} -p${process.env.MYSQL_PASSWORD} ${process.env.MYBBDDTEST} < ${filePath}`;
 
   exec(cmd, (error) => {
     if (error) {
@@ -73,7 +73,7 @@ app.post("/restore-manual", upload.single("sqlfile"), (req, res) => {
     return res.status(400).send("❌ No se subió ningún archivo.");
   }
 
-  const dbName = req.query.db || process.env.MYSQL_DATABASE;
+  const dbName = req.query.db || process.env.MYBBDDTEST;
   const filePath = req.file.path;
 
   const cmd = `mysql -h ${process.env.MYSQL_HOST} -P ${process.env.MYSQL_PORT} -u ${process.env.MYSQL_USER} -p${process.env.MYSQL_PASSWORD} ${dbName} < ${filePath}`;
