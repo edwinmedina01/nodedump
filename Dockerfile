@@ -1,7 +1,12 @@
-FROM node:18-slim
+# Imagen base más completa (no slim)
+FROM node:18-bullseye
 
-# Instala el cliente de MySQL (trae mysqldump)
-RUN apt-get update && apt-get install -y mysql-client && apt-get clean
+# Instala mysql-client
+RUN apt-get update && \
+    apt-get install -y gnupg && \
+    apt-get install -y mysql-client && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
