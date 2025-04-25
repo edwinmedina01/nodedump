@@ -16,7 +16,7 @@ app.get("/", async (req, res) => {
     if (error) return res.status(500).send("❌ Error al generar backup");
 
  const auth = new google.auth.GoogleAuth({
-  credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS),
+  keyFile: 'credentials.json',
   scopes: ['https://www.googleapis.com/auth/drive.file'],
 });
 
